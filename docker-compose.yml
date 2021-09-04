@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+  proxy:
+    build: nginx
+
+  redis:
+    image: redis:6.2.5-alpine
+
+  app:
+    build:
+      context: app

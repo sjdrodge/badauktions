@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  proxy:
+    ports:
+      - 8080:80
+
+  app:
+    build:
+      target: dev
+    volumes:
+      - ./app/src:/home/node/app/src
+      - ./app/package.json:/home/node/app/package.json
+      - ./app/package-lock.json:/home/node/app/package-lock.json
+      - ./app/tsconfig.json:/home/node/app/tsconfig.json
+    ports:
+      - 3000:3000
