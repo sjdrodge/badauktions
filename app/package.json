@@ -1,5 +1,5 @@
 {
-  "name": "badauktions",
+  "name": "badauktions_app",
   "version": "0.1.0",
   "private": true,
   "description": "A webapp for coordinating cooperative Go/Baduk/Weiqi play via auctions.",
