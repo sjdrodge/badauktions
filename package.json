@@ -1,0 +1,24 @@
+{
+  "name": "badauktions",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A webapp for coordinating cooperative Go/Baduk/Weiqi play via auctions.",
+  "author": "Stephen Drodge <stephen.drodge@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint . && prettier . -c",
+    "lint:fix": "eslint . --fix && prettier . --write"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.31.0",
+    "@typescript-eslint/parser": "^4.31.0",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-airbnb-typescript": "^14.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.3.2",
+    "typescript": "^4.4.2"
+  }
+}
