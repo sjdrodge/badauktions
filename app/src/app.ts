@@ -32,7 +32,7 @@ function shutdown() {
 }
 
 const signals = ['SIGINT', 'SIGTERM'];
-signals.forEach((signal) => {
+for (const signal of signals) {
   process.on(signal, () => {
     console.info(
       `Received ${signal}. Shutting down gracefully...`,
@@ -40,4 +40,4 @@ signals.forEach((signal) => {
     );
     shutdown();
   });
-});
+}
