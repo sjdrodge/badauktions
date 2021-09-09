@@ -36,7 +36,7 @@ for (const signal of signals) {
   process.on(signal, () => {
     console.info(
       `Received ${signal}. Shutting down gracefully...`,
-      new Date().toISOString()
+      new Date().toISOString(),
     );
     shutdown();
   });
