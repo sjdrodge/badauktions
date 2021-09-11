@@ -5,6 +5,6 @@ services:
     ports:
       - 80:80
 
-  app:
+  server:
     build:
       target: prod

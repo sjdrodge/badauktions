@@ -5,13 +5,13 @@ services:
     ports:
       - 8080:80
 
-  app:
+  server:
     build:
       target: dev
     volumes:
-      - ./app/src:/home/node/app/src
-      - ./app/package.json:/home/node/app/package.json
-      - ./app/package-lock.json:/home/node/app/package-lock.json
-      - ./app/tsconfig.json:/home/node/app/tsconfig.json
+      - ./server/src:/home/node/app/src
+      - ./server/package.json:/home/node/app/package.json
+      - ./server/package-lock.json:/home/node/app/package-lock.json
+      - ./server/tsconfig.json:/home/node/app/tsconfig.json
     ports:
       - 3000:3000

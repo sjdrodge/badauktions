@@ -7,6 +7,6 @@ services:
   redis:
     image: redis:6.2.5-alpine
 
-  app:
+  server:
     build:
-      context: app
+      context: server
