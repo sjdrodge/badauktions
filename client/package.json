@@ -2,6 +2,9 @@
   "name": "badauktions_client",
   "version": "0.1.0",
   "private": true,
+  "description": "A webapp for coordinating cooperative Go/Baduk/Weiqi play via auctions.",
+  "author": "Stephen Drodge <stephen.drodge@gmail.com>",
+  "license": "MIT",
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",

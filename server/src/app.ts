@@ -17,6 +17,9 @@ redisClient.on("error", (error) => {
 
 app.get("/api/visits", (req, res) => {
   redisClient.incr("visits", (err, visits) => {
+    if (err) {
+      console.error(err);
+    }
     res.send(`${visits}`);
     io.emit("visit", `${visits}`);
   });
@@ -24,26 +27,26 @@ app.get("/api/visits", (req, res) => {
 
 app.get("/api/button_clicks", (req, res) => {
   redisClient.get("button_clicks", (err, clicks) => {
+    if (err) {
+      console.error(err);
+    }
     res.send(clicks || "0");
   });
 });
 
 io.on("connection", (socket) => {
-  console.log(
-    `New socket.io connection: ${socket.id} from ${socket.handshake.address}`,
-  );
-  socket.on("disconnect", (reason) => {
-    console.log(`Closed socket.io connection: ${socket.id} due to "${reason}"`);
-  });
   socket.on("button_click", () => {
     redisClient.incr("button_clicks", (err, clicks) => {
+      if (err) {
+        console.error(err);
+      }
       io.emit("click_count", `${clicks}`);
     });
   });
 });
 
 server.listen(port, () => {
-  console.log(`Badauktions listening at http://localhost:${port}`);
+  console.log(`Listening at http://localhost:${port}`);
 });
 
 function shutdown() {

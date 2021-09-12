@@ -7,7 +7,7 @@ type SockRef = Socket<DefaultEventsMap, DefaultEventsMap> | null;
 
 function App() {
   const [visits, setVisits] = useState("");
-  const [presses, setPresses] = useState("");
+  const [clickCount, setClickCount] = useState("");
 
   const socket = useRef<SockRef>(null);
 
@@ -21,7 +21,7 @@ function App() {
   useEffect(() => {
     fetch("/api/button_clicks")
       .then((res) => res.text())
-      .then(setPresses)
+      .then(setClickCount)
       .catch(console.error);
   }, []);
 
@@ -33,7 +33,7 @@ function App() {
     });
 
     newSocket.on("click_count", (ev) => {
-      setPresses(ev as string);
+      setClickCount(ev as string);
     });
 
     socket.current = newSocket;
@@ -56,7 +56,7 @@ function App() {
           if (socket.current) socket.current.emit("button_click");
         }}
       >
-        I have been pressed {presses} times so far!
+        I have been clicked {clickCount} times so far!
       </button>
     </div>
   );
