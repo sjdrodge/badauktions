@@ -22,12 +22,23 @@ app.get("/api/visits", (req, res) => {
   });
 });
 
+app.get("/api/button_clicks", (req, res) => {
+  redisClient.get("button_clicks", (err, clicks) => {
+    res.send(clicks || "0");
+  });
+});
+
 io.on("connection", (socket) => {
   console.log(
     `New socket.io connection: ${socket.id} from ${socket.handshake.address}`,
   );
   socket.on("disconnect", (reason) => {
     console.log(`Closed socket.io connection: ${socket.id} due to "${reason}"`);
+  });
+  socket.on("button_click", () => {
+    redisClient.incr("button_clicks", (err, clicks) => {
+      io.emit("click_count", `${clicks}`);
+    });
   });
 });
 

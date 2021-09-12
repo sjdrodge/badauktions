@@ -1,0 +1,14 @@
+.App {
+  text-align: center;
+}
+
+.TheButton {
+  background-color: #1b9af7;
+  border-color: #1b9af7;
+  color: white;
+  margin: 5px;
+  border-radius: 4px;
+  line-height: 50px;
+  padding: 0 20px;
+  font-size: 18px;
+}
