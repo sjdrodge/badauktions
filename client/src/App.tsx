@@ -1,15 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { io, Socket } from "socket.io-client";
-import { DefaultEventsMap } from "socket.io-client/build/typed-events";
 import style from "./App.module.css";
-
-type SockRef = Socket<DefaultEventsMap, DefaultEventsMap> | null;
 
 function App() {
   const [visits, setVisits] = useState("");
   const [clickCount, setClickCount] = useState("");
 
-  const socket = useRef<SockRef>(null);
+  const socket = useRef<Socket | null>(null);
 
   useEffect(() => {
     fetch("/api/visits")
