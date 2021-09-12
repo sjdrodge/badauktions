@@ -2,6 +2,8 @@ version: "3.8"
 
 services:
   proxy:
+    build:
+      target: proxy_dev
     ports:
       - 8080:80
 
@@ -13,5 +15,19 @@ services:
       - ./server/package.json:/home/node/app/package.json
       - ./server/package-lock.json:/home/node/app/package-lock.json
       - ./server/tsconfig.json:/home/node/app/tsconfig.json
+    ports:
+      - 5000:5000
+
+  client:
+    build:
+      context: client
+      target: dev
+    volumes:
+      - ./client/public:/home/node/app/public
+      - ./client/src:/home/node/app/src
+      - ./client/package.json:/home/node/app/package.json
+      - ./client/package-lock.json:/home/node/app/package-lock.json
+      - ./client/tsconfig.json:/home/node/app/tsconfig.json
+      - ./client/.env:/home/node/app/.env
     ports:
       - 3000:3000

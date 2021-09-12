@@ -7,32 +7,20 @@ const redisClient = redis.createClient({
   host: "redis",
 });
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
+const server = http.createServer(app);
+const io = new socketIO.Server(server, { path: "/api/socket.io" });
 
 redisClient.on("error", (error) => {
   console.error(error);
 });
 
-app.get("/", (req, res) => {
+app.get("/api/visits", (req, res) => {
   redisClient.incr("visits", (err, visits) => {
-    res.send(`<!DOCTYPE html>
-<html>
-<head>
-<script src="/socket.io/socket.io.js"></script>
-<script>
-const socket = io();
-</script>
-</head>
-<body>
-<h1>Hello, World!</h1>
-${visits} visits to this page so far!
-</body>
-</html>`);
+    res.send(`${visits}`);
+    io.emit("visit", `${visits}`);
   });
 });
-
-const server = http.createServer(app);
-const io = new socketIO.Server(server, {});
 
 io.on("connection", (socket) => {
   console.log(
