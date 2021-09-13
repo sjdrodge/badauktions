@@ -1,5 +1,6 @@
 import express from "express";
 import http from "http";
+import gracefulShutdown from "http-graceful-shutdown";
 import redis from "redis";
 import socketIO from "socket.io";
 
@@ -49,23 +50,20 @@ server.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`);
 });
 
-function shutdown() {
-  server.close((err) => {
-    if (err) {
-      console.error(err);
-      process.exitCode = 1;
-    }
-    process.exit();
-  });
+async function preShutdownFunction(signal?: string) {
+  return Promise.resolve(
+    console.info(
+      `Received ${signal || "signal"}. Shutting down...`,
+      new Date().toISOString(),
+    ),
+  );
 }
 
-const signals = ["SIGINT", "SIGTERM"];
-for (const signal of signals) {
-  process.on(signal, () => {
-    console.info(
-      `Received ${signal}. Shutting down gracefully...`,
-      new Date().toISOString(),
-    );
-    shutdown();
-  });
+function postShutdownFunction() {
+  console.info("Finished shutting down.", new Date().toISOString());
 }
+
+gracefulShutdown(server, {
+  preShutdown: preShutdownFunction,
+  finally: postShutdownFunction,
+});
