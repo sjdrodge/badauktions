@@ -9,13 +9,13 @@ const redisClient = redis.createClient({
 const app = express();
 const port = process.env.PORT || 5000;
 const server = http.createServer(app);
-const io = new socketIO.Server(server, { path: "/api/socket.io" });
+const io = new socketIO.Server(server, {});
 
 redisClient.on("error", (error) => {
   console.error(error);
 });
 
-app.get("/api/visits", (req, res) => {
+app.get("/visits", (req, res) => {
   redisClient.incr("visits", (err, visits) => {
     if (err) {
       console.error(err);
@@ -25,7 +25,7 @@ app.get("/api/visits", (req, res) => {
   });
 });
 
-app.get("/api/button_clicks", (req, res) => {
+app.get("/button_clicks", (req, res) => {
   redisClient.get("button_clicks", (err, clicks) => {
     if (err) {
       console.error(err);
