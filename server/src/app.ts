@@ -50,20 +50,20 @@ server.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`);
 });
 
-async function preShutdownFunction(signal?: string) {
+async function preShutdown(signal?: string) {
   return Promise.resolve(
     console.info(
-      `Received ${signal || "signal"}. Shutting down...`,
+      signal ? `Received ${signal}. Shutting down...` : "Shutting down...",
       new Date().toISOString(),
     ),
   );
 }
 
-function postShutdownFunction() {
+function postShutdown() {
   console.info("Finished shutting down.", new Date().toISOString());
 }
 
 gracefulShutdown(server, {
-  preShutdown: preShutdownFunction,
-  finally: postShutdownFunction,
+  preShutdown,
+  finally: postShutdown,
 });
