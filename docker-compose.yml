@@ -1,13 +1,13 @@
 version: "3.8"
 
 services:
-  proxy:
+  nginx:
     build:
       context: client
 
   redis:
-    image: redis:6.2.5-alpine
+    image: redis:6.2-alpine
 
-  server:
+  nodejs-app:
     build:
       context: server

@@ -1,12 +1,12 @@
 version: "3.8"
 
 services:
-  proxy:
+  nginx:
     build:
-      target: proxy_prod
+      target: proxy-prod
     ports:
       - 80:80
 
-  server:
+  nodejs-app:
     build:
       target: prod
