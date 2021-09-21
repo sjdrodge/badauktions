@@ -6,7 +6,7 @@ ENV PATH=/home/node/app/node_modules/.bin:$PATH
 RUN npm ci
 CMD ["npm", "run", "start"]
 
-FROM nginx:1.20-alpine as proxy-base
+FROM nginx:1.21-alpine as proxy-base
 RUN rm /etc/nginx/conf.d/default.conf
 
 FROM proxy-base as proxy-dev
