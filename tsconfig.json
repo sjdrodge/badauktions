@@ -3,5 +3,5 @@
     "allowJs": true,
     "noEmit": true
   },
-  "include": [".prettierrc.js", ".eslintrc.js"]
+  "include": [".eslintrc.js", ".prettierrc.js"]
 }
