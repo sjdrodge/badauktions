@@ -1,9 +1,10 @@
 FROM node:16-slim AS dev
 RUN mkdir /home/node/app
 WORKDIR /home/node/app
-COPY package.json package-lock.json ./
-RUN npm ci
-CMD ["npm", "run", "start"]
+RUN yarn set version berry
+COPY package.json ./
+RUN yarn install
+CMD ["yarn", "run", "start"]
 
 FROM nginx:1.21-alpine AS proxy-base
 RUN rm /etc/nginx/conf.d/default.conf
@@ -13,7 +14,7 @@ COPY nginx/dev.conf /etc/nginx/nginx.conf
 
 FROM dev AS build
 COPY . .
-RUN npm run build
+RUN yarn run build
 
 FROM proxy-base AS proxy-prod
 COPY nginx/prod.conf /etc/nginx/nginx.conf

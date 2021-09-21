@@ -3,22 +3,23 @@ USER node
 ENV NODE_ENV=production
 RUN mkdir /home/node/app
 WORKDIR /home/node/app
-COPY package.json package-lock.json ./
-RUN npm ci && npm cache clean --force
+RUN yarn set version berry
+COPY package.json ./
+RUN yarn plugin import workspace-tools
+RUN yarn workspaces focus --all --production
 
 FROM base AS dev
 ENV NODE_ENV=development
-ENV PATH=/home/node/app/node_modules/.bin:$PATH
 # Production dependencies were already installed in the base image.
 # Now we install the dev dependencies (and avoid modifying package-lock.json).
-RUN npm install --save=false
-CMD ["nodemon"]
+RUN yarn install
+CMD ["yarn", "run", "dev"]
 
 FROM dev AS build
 ENV NODE_ENV=production
 COPY --chown=node:node . .
-RUN npm run build
+RUN yarn run build
 
 FROM base AS prod
 COPY --from=build --chown=node:node /home/node/app/dist ./dist
-CMD ["node", "dist/app.js"]
+CMD ["yarn", "run", "start"]
