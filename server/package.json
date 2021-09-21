@@ -5,7 +5,6 @@
   "description": "A webapp for coordinating cooperative Go/Baduk/Weiqi play via auctions.",
   "author": "Stephen Drodge <stephen.drodge@gmail.com>",
   "license": "MIT",
-  "main": "src/app.ts",
   "scripts": {
     "build": "tsc",
     "start": "node dist/app.js",
