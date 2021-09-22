@@ -1,6 +1,6 @@
 {
-  "short_name": "Badauktions",
-  "name": "Badauktions",
+  "short_name": "node-docker-template",
+  "name": "node-docker-template",
   "icons": [
     {
       "src": "favicon.ico",

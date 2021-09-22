@@ -1,10 +1,10 @@
 {
-  "name": "badauktions_client",
+  "name": "node-docker-template-client",
   "version": "0.1.0",
   "private": true,
-  "description": "A webapp for coordinating cooperative Go/Baduk/Weiqi play via auctions.",
+  "description": "A template full stack web application using NodeJS, Docker, Nginx, Redis, Socket.io, and React.",
   "author": "Stephen Drodge <stephen.drodge@gmail.com>",
-  "license": "MIT",
+  "license": "GPL-3.0-or-later",
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
