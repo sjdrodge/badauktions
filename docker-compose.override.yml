@@ -3,7 +3,7 @@ version: "3.8"
 services:
   nginx:
     build:
-      target: proxy-dev
+      target: nginx-dev
     ports:
       - 8080:80
 
