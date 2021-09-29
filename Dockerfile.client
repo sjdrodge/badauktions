@@ -1,7 +1,7 @@
 FROM node:16-slim AS dev
 RUN mkdir /home/node/app
 WORKDIR /home/node/app
-COPY package.json package-lock.json ./
+COPY packages/client/package.json package-lock.json ./
 RUN npm ci
 CMD ["npm", "run", "start"]
 
@@ -12,7 +12,7 @@ FROM proxy-base AS proxy-dev
 COPY nginx/dev.conf /etc/nginx/nginx.conf
 
 FROM dev AS build
-COPY . .
+COPY packages/client ./
 RUN npm run build
 
 FROM proxy-base AS proxy-prod

@@ -11,23 +11,22 @@ services:
     build:
       target: dev
     volumes:
-      - ./server/src:/home/node/app/src
-      - ./server/package.json:/home/node/app/package.json
-      - ./server/package-lock.json:/home/node/app/package-lock.json
-      - ./server/tsconfig.json:/home/node/app/tsconfig.json
+      - ./packages/server/src:/home/node/app/src
+      - ./packages/server/package.json:/home/node/app/package.json
+      - ./packages/server/tsconfig.json:/home/node/app/tsconfig.json
     ports:
       - 5000:5000
 
   webpack-dev-server:
     build:
-      context: client
+      context: ./
+      dockerfile: Dockerfile.client
       target: dev
     volumes:
-      - ./client/public:/home/node/app/public
-      - ./client/src:/home/node/app/src
-      - ./client/package.json:/home/node/app/package.json
-      - ./client/package-lock.json:/home/node/app/package-lock.json
-      - ./client/tsconfig.json:/home/node/app/tsconfig.json
-      - ./client/.env:/home/node/app/.env
+      - ./packages/client/public:/home/node/app/public
+      - ./packages/client/src:/home/node/app/src
+      - ./packages/client/package.json:/home/node/app/package.json
+      - ./packages/client/tsconfig.json:/home/node/app/tsconfig.json
+      - ./packages/client/.env:/home/node/app/.env
     ports:
       - 3000:3000

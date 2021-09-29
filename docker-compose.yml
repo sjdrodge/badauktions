@@ -3,11 +3,13 @@ version: "3.8"
 services:
   nginx:
     build:
-      context: client
+      context: ./
+      dockerfile: Dockerfile.client
 
   redis:
     image: redis:6.2-alpine
 
   nodejs-app:
     build:
-      context: server
+      context: ./
+      dockerfile: Dockerfile.server
