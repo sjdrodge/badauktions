@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { io, Socket } from "socket.io-client";
 import style from "./App.module.css";
 
-function App() {
+function App(): JSX.Element {
   const [visits, setVisits] = useState("");
   const [clickCount, setClickCount] = useState("");
 
